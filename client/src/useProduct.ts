@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { postProduct, type Product } from "./domain/Product";
+import { type Product } from "./domain/Product";
+import { deleteProduct, postProduct } from "./domain/ProductApi";
 
 export const useProduct = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -22,7 +23,7 @@ export const useProduct = () => {
   };
 
   const handleDelete = async (id: number) => {
-    await fetch(`/products/${id}`, { method: "DELETE" });
+    await deleteProduct({ id });
     setProducts((prev) => prev.filter((p) => p.id !== id));
   };
 
