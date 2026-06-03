@@ -5,11 +5,11 @@ export interface Product {
 }
 
 export const validateName = (name: string) => {
-  return name.length === 0 || name.length > 100;
+  return name.length !== 0 && name.length <= 100;
 };
 
 export const validatePrice = (price: number) => {
-  return price <= 0;
+  return price >= 0;
 };
 
 export const postProduct = async ({
