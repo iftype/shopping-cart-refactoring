@@ -1,5 +1,5 @@
 import "./App.css";
-import { ProductPage } from "./ProductPage";
+import { ProductPage } from "./Presentation/ProductPage";
 
 function App() {
   return <ProductPage />;

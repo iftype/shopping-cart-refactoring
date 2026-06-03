@@ -1,6 +1,6 @@
-import { ProductForm } from "./components/ProductForm";
-import ProductSection from "./components/ProductSection";
-import { useProduct } from "./useProduct";
+import { useProduct } from "../Application/useProduct";
+import { ProductForm } from "./ProductForm";
+import ProductSection from "./ProductSection";
 
 export const ProductPage = () => {
   const { products, handleAdd, handleDelete } = useProduct();
