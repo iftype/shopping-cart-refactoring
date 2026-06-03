@@ -1,8 +1,8 @@
 import "./App.css";
-import ProductSection from "./components/ProductSection";
+import { ProductPage } from "./ProductPage";
 
 function App() {
-  return <ProductSection />;
+  return <ProductPage />;
 }
 
 export default App;
