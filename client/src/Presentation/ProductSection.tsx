@@ -1,9 +1,6 @@
-import type { Product } from "../domain/Product";
+import type { useProductResult } from "../Application/useProduct";
 
-interface ProductSectionProps {
-  products: Product[];
-  handleDelete: (id: number) => Promise<void>;
-}
+type ProductSectionProps = Pick<useProductResult, "products" | "handleDelete">;
 
 export default function ProductSection({
   products,

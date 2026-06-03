@@ -2,20 +2,26 @@ import { useEffect, useState } from "react";
 import type { Product, ProductRepository } from "../domain/Product";
 import { productApi } from "../Infrastructure/ProductApi";
 
-export const useProduct = (fetchApi: ProductRepository = productApi) => {
+export type ProductInputField = {
+  name: string;
+  price: string;
+};
+export interface useProductResult {
+  products: Product[];
+  handleAdd: ({ name, price }: ProductInputField) => Promise<void>;
+  handleDelete: (id: number) => Promise<void>;
+}
+
+export const useProduct = (
+  fetchApi: ProductRepository = productApi,
+): useProductResult => {
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
     fetchApi.getAll().then(setProducts);
   }, [fetchApi]);
 
-  const handleAdd = async ({
-    name,
-    price,
-  }: {
-    name: string;
-    price: string;
-  }) => {
+  const handleAdd = async ({ name, price }: ProductInputField) => {
     const product = await fetchApi.add({ name, price: Number(price) });
     setProducts((prev) => [...prev, product]);
   };

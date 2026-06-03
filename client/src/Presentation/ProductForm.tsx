@@ -1,17 +1,10 @@
 import { useState } from "react";
 import { validateName, validatePrice } from "../domain/Product";
+import type { useProductResult } from "../Application/useProduct";
 
-interface ProductForm {
-  handleAdd: ({
-    name,
-    price,
-  }: {
-    name: string;
-    price: string;
-  }) => Promise<void>;
-}
+type ProductFormProps = Pick<useProductResult, "handleAdd">;
 
-export const ProductForm = ({ handleAdd }: ProductForm) => {
+export const ProductForm = ({ handleAdd }: ProductFormProps) => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [error, setError] = useState("");
