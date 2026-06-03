@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
-import type { Product } from "../domain/Product";
-import { deleteProduct, postProduct } from "../Infrastructure/ProductApi";
+import type { Product, ProductRepository } from "../domain/Product";
+import { productApi } from "../Infrastructure/ProductApi";
 
-export const useProduct = () => {
+export const useProduct = (fetchApi: ProductRepository = productApi) => {
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
-    fetch("/products")
-      .then((res) => res.json())
-      .then(setProducts);
-  }, []);
+    fetchApi.getAll().then(setProducts);
+  }, [fetchApi]);
 
   const handleAdd = async ({
     name,
@@ -18,12 +16,12 @@ export const useProduct = () => {
     name: string;
     price: string;
   }) => {
-    const product = await postProduct({ name, price: Number(price) });
+    const product = await fetchApi.add({ name, price: Number(price) });
     setProducts((prev) => [...prev, product]);
   };
 
   const handleDelete = async (id: number) => {
-    await deleteProduct({ id });
+    await fetchApi.remove(id);
     setProducts((prev) => prev.filter((p) => p.id !== id));
   };
 

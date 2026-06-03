@@ -11,3 +11,9 @@ export const validateName = (name: string) => {
 export const validatePrice = (price: number) => {
   return price > 0;
 };
+
+export interface ProductRepository {
+  getAll(): Promise<Product[]>;
+  add(product: Pick<Product, "name" | "price">): Promise<Product>;
+  remove(id: number): Promise<void>;
+}
