@@ -1,4 +1,4 @@
-import type { ProductRepository } from "../domain/Product";
+import type { ProductRepository } from "../domain/product";
 
 export const productApi: ProductRepository = {
   getAll: async () => {

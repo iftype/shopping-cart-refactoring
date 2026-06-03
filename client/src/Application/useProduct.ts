@@ -4,8 +4,8 @@ import {
   validatePrice,
   type Product,
   type ProductRepository,
-} from "../domain/Product";
-import { productApi } from "../Infrastructure/ProductApi";
+} from "../domain/product";
+import { productApi } from "../Infrastructure/productApi";
 
 export type ProductInputField = {
   name: string;
