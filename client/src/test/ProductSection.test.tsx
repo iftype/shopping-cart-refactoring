@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import ProductSection from "./ProductSection";
+import ProductSection from "../components/ProductSection";
 
 beforeEach(() => {
   globalThis.fetch = vi
