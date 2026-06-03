@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { validateName, validatePrice } from "../domain/Product";
 import type { useProductResult } from "../Application/useProduct";
 
 type ProductFormProps = Pick<useProductResult, "handleAdd">;
@@ -10,17 +9,12 @@ export const ProductForm = ({ handleAdd }: ProductFormProps) => {
   const [error, setError] = useState("");
 
   const onSubmit = async () => {
-    if (!validateName(name)) {
-      setError("상품명은 1~100자여야 합니다");
-      return;
-    }
-    if (!validatePrice(Number(price))) {
-      setError("가격은 0보다 커야 합니다");
-      return;
-    }
     setError("");
 
-    await handleAdd({ name, price });
+    const result = await handleAdd({ name, price });
+    if (result.status === "error") {
+      setError(result.msg);
+    }
     setName("");
     setPrice("");
   };
