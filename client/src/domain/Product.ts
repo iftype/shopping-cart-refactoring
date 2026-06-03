@@ -9,5 +9,5 @@ export const validateName = (name: string) => {
 };
 
 export const validatePrice = (price: number) => {
-  return price >= 0;
+  return price > 0;
 };

@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import ProductSection from "../components/ProductSection";
+import { ProductPage } from "../ProductPage";
 
 beforeEach(() => {
   globalThis.fetch = vi
@@ -28,7 +28,7 @@ beforeEach(() => {
 describe("초기 렌더", () => {
   it("서버에서 가져온 상품이 화면에 표시된다", async () => {
     // Given
-    render(<ProductSection />);
+    render(<ProductPage />);
 
     // When
     const product = await screen.findByText("사과 — 1,000원");
@@ -43,7 +43,7 @@ describe("상품 추가 — 유효성 검사", () => {
     const user = userEvent.setup();
 
     // Given
-    render(<ProductSection />);
+    render(<ProductPage />);
     await user.type(screen.getByPlaceholderText("가격"), "1000");
 
     // When
@@ -57,7 +57,7 @@ describe("상품 추가 — 유효성 검사", () => {
     const user = userEvent.setup();
 
     // Given
-    render(<ProductSection />);
+    render(<ProductPage />);
     await user.type(screen.getByPlaceholderText("상품명"), "a".repeat(101));
     await user.type(screen.getByPlaceholderText("가격"), "1000");
 
@@ -72,7 +72,7 @@ describe("상품 추가 — 유효성 검사", () => {
     const user = userEvent.setup();
 
     // Given
-    render(<ProductSection />);
+    render(<ProductPage />);
     await user.type(screen.getByPlaceholderText("상품명"), "배");
     await user.type(screen.getByPlaceholderText("가격"), "0");
 
@@ -89,7 +89,7 @@ describe("상품 추가 — 성공", () => {
     const user = userEvent.setup();
 
     // Given
-    render(<ProductSection />);
+    render(<ProductPage />);
     await user.type(screen.getByPlaceholderText("상품명"), "배");
     await user.type(screen.getByPlaceholderText("가격"), "500");
 
@@ -104,7 +104,7 @@ describe("상품 추가 — 성공", () => {
     const user = userEvent.setup();
 
     // Given
-    render(<ProductSection />);
+    render(<ProductPage />);
     await user.type(screen.getByPlaceholderText("상품명"), "배");
     await user.type(screen.getByPlaceholderText("가격"), "500");
     await user.click(screen.getByText("추가"));
@@ -125,7 +125,7 @@ describe("상품 삭제", () => {
     const user = userEvent.setup();
 
     // Given
-    render(<ProductSection />);
+    render(<ProductPage />);
     expect(await screen.findByText("사과 — 1,000원")).toBeInTheDocument();
 
     // When
